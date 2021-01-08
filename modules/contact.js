@@ -7,6 +7,7 @@ let auth = require("./slack-salesforce-auth"),
 exports.execute = (req, res) => {
 
 	console.log("contact token...:", req.body.token);
+	console.log("contact body:", req.body);
 	console.log("contact CONTACT_TOKEN...:", CONTACT_TOKEN);
 
     if (req.body.token != CONTACT_TOKEN) {
