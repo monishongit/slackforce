@@ -9,7 +9,7 @@ let express = require('express'),
     _case = require('./modules/case'),
     whoami = require('./modules/whoami'),
 	actions = require('./modules/actions'),
-	slackvance = require('./modules/slackvance'),
+	/*slackvance = require('./modules/slackvance'),*/
     app = express();
 
 
@@ -21,7 +21,7 @@ app.use('/', express.static(__dirname + '/www')); // serving company logos after
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.post('/slackvance', slackvance.execute);
+//app.post('/slackvance', slackvance.execute);
 app.post('/actions', actions.execute);
 app.post('/pipeline', opportunity.execute);
 app.post('/contact', contact.execute);
