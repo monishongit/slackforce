@@ -18,9 +18,9 @@ exports.handle = (req, res) => {
 	// 		model : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
 	// 		saver : "SBAA.ApprovalRestApiProvider.Approve"
 	// 	};
-	//console.log(req.body);
+	console.log(req.body);
 	console.log('Got approved');
-	res.send("Got approved");
+	res.send(req.body);
 	// force.apexrest(oauthObj, '/sbaa/ServiceRouter', options).then(data => {
 	// 	res.send(data);
 	// }).catch(error => {
