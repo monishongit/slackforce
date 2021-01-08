@@ -23,7 +23,7 @@ exports.execute = (req, res) => {
             // let contacts = JSON.parse(data);
 			//     res.json({text: "Contacts matching '" + req.body.text + "':", attachments: attachments});
 			console.log(data);
-			res.send(data);
+			res.send("done");
         })
         .catch(error => {
             if (error.code == 401) {
