@@ -18,7 +18,8 @@ exports.handle = (req, res) => {
 		// 		model : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
 		// 		saver : "SBAA.ApprovalRestApiProvider.Approve"
 		// 	};
-		console.log(req.body.actions);
+		console.log('slackvance broker got request');
+		console.log(req.body);
 		let modelValue = req.body.actions[0].value;
 		console.log(modelValue);
 		let saverValue = '';
