@@ -34,7 +34,7 @@ exports.handle = (req, res) => {
 		// }
 	console.log(req.body);
 	console.log('Got approved');
-	
+	res.send("end");
 	// force.apexrest(oauthObj, '/sbaa/ServiceRouter', options).then(data => {
 	// 	res.send(data);
 	// }).catch(error => {
