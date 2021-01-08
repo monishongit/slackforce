@@ -20,17 +20,17 @@ exports.handle = (req, res) => {
 		// 	};
 		console.log('slackvance broker got request');
 		console.log(req.body);
-		let modelValue = req.body.actions[0].value;
-		console.log(modelValue);
-		let saverValue = '';
-		if (req.body.actions[0].text.text == 'Approve') {
-			saverValue = 'SBAA.ApprovalRestApiProvider.Approve'
-		} else {
-			saverValue = 'SBAA.ApprovalRestApiProvider.Reject'
-		}
-		let options = {
-			model : modelValue,
-			saver : saverValue
+		// let modelValue = req.body.actions[0].value;
+		// console.log(modelValue);
+		// let saverValue = '';
+		// if (req.body.actions[0].text.text == 'Approve') {
+		// 	saverValue = 'SBAA.ApprovalRestApiProvider.Approve'
+		// } else {
+		// 	saverValue = 'SBAA.ApprovalRestApiProvider.Reject'
+		// }
+		// let options = {
+		// 	model : modelValue,
+		// 	saver : saverValue
 		}
 	console.log(req.body);
 	console.log('Got approved');
