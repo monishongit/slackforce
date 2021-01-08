@@ -5,10 +5,17 @@ let auth = require("./slack-salesforce-auth"),
     CONTACT_TOKEN = process.env.SLACK_CONTACT_TOKEN;
 
 exports.handle = (req, res) => {
+	try {
 	console.log("got it..");
-   res.send("got it");
-    // let slackUserId = req.body.user_id,
-    //     oauthObj = auth.getOAuthObject(slackUserId);
+
+	if (req.body.token != CONTACT_TOKEN) {
+		console.log("invalid token..")
+        res.send("Invalid token");
+        return;
+    }
+
+     let slackUserId = req.body.user_id,
+         oauthObj = auth.getOAuthObject(slackUserId);
 		// let optionstmp = {
 		// 		method: 'POST',
 		// 		model : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
@@ -30,7 +37,7 @@ exports.handle = (req, res) => {
 		// }
 	// console.log(req.body);
 	// console.log('Got approved');
-	// res.send("end");
+	res.send("end");
 	// force.apexrest(oauthObj, '/sbaa/ServiceRouter', options).then(data => {
 	// 	res.send(data);
 	// }).catch(error => {
@@ -40,4 +47,8 @@ exports.handle = (req, res) => {
 	// 		res.send(data);
 	// 	}
 	// });
+} catch {
+	console.log("end error");
+	res.send("end error");
+}
 };
