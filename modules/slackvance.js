@@ -18,17 +18,19 @@ exports.execute = (req, res) => {
 			model : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
 			saver : "SBAA.ApprovalRestApiProvider.Approve"
 		};
-
+	console.log(req.body);
 	force.apexrest(oauthObj, '/sbaa/ServiceRouter', options).then(data => {
             // let contacts = JSON.parse(data);
-            //     res.json({text: "Contacts matching '" + req.body.text + "':", attachments: attachments});
+			//     res.json({text: "Contacts matching '" + req.body.text + "':", attachments: attachments});
+			console.log(data);
 			res.send(data);
         })
         .catch(error => {
             if (error.code == 401) {
                 res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/` + slackUserId);
             } else {
-                res.send("An error as occurred", data);
+				console.log(data);
+                res.send("An error as occurred");
             }
         });
 };
