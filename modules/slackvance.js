@@ -18,8 +18,9 @@ exports.handle = (req, res) => {
 		// 		model : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
 		// 		saver : "SBAA.ApprovalRestApiProvider.Approve"
 		// 	};
-		
+		console.log(req.body.actions);
 		let modelValue = req.body.actions[0].value;
+		console.log(modelValue);
 		let saverValue = '';
 		if (req.body.actions[0].text.text == 'Approve') {
 			saverValue = 'SBAA.ApprovalRestApiProvider.Approve'
