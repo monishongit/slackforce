@@ -15,6 +15,12 @@ exports.handle = (req, res) => {
         oauthObj = auth.getOAuthObject(slackUserId),
         q = "SELECT Id, Name, Phone, MobilePhone, Email FROM Contact WHERE Name LIKE '%" + req.body.text + "%' LIMIT 5";
 
+	options = {
+		method: 'POST',
+		model : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
+		saver : "SBAA.ApprovalRestApiProvider.Approve"
+	};
+	console.log(req.body);
     force.query(oauthObj, q)
         .then(data => {
             let contacts = JSON.parse(data).records;
