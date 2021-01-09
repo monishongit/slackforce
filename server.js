@@ -10,6 +10,7 @@ let express = require('express'),
     whoami = require('./modules/whoami'),
 	actions = require('./modules/actions'),
 	slackvance = require('./modules/slackvance'),
+	slackvance2 = require('./modules/slackvance2'),
     app = express();
 
 
