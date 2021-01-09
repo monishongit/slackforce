@@ -53,8 +53,11 @@ exports.handle = (req, res) => {
 			res.send(data);
 			let result = JSON.stringify(data);
 			let resBody = {
+				replace_original: false,
 				text: result
 			}
+			console.log('uri', payload.response_url);
+			console.log('body', resBody);
 			request.post({
 				uri: payload.response_url,
 				body: resBody,
