@@ -52,20 +52,22 @@ exports.handle = (req, res) => {
 			console.log('apexrest result: ', data);
 			res.send(data);
 			let result = JSON.stringify(data);
-			request.post(
-				payload.response_url,
-				{
-				  text: result
-				},
-				(error, res, body) => {
-				  if (error) {
-					console.error(error)
+			let resBody = {
+				text: result
+			}
+			request.post({
+				uri: payload.response_url,
+				body: resBody,
+				json:true
+			}, function (err, res, body) {
+				//handle callback  
+				if (err) {
+					console.error(err)
 					return
 				  }
 				  console.log(`statusCode: ${res.statusCode}`)
-				  console.log(body)
-				}
-			)
+				  console.log(body)          
+			});
 		}).catch(error => {
 			console.log('apexrest error: ', error);
 			if (error.code == 401) {
