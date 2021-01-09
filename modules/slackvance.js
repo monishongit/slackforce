@@ -42,7 +42,7 @@ exports.handle = (req, res) => {
 		// 		saver : "SBAA.ApprovalRestApiProvider.Approve"
 		// 	};
 		let status = '';
-		let modelValue = "{approvalId:" + payload.actions[0].value + "}";
+		let modelValue = {approvalId: payload.actions[0].value};
 		let saverValue = '';
 		if (payload.actions[0].text.text == 'Approve') {
 			saverValue = 'SBAA.ApprovalRestApiProvider.Approve'
