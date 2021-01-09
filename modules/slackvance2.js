@@ -31,7 +31,7 @@ exports.handle = (req, res) => {
 		conn.login('test-kdqmffi3ivs8@example.com', 'test1234q36ZhdYW2YpT9puMOKdDNwpnQ', function(err, res) {
 		if (err) { return console.error(err); }
 			// body payload structure is depending to the Apex REST method interface.
-			conn.apex.post("/sbaa/ServiceRouter", options.body, function(err, res) {
+			conn.apex.post("/sbaa/ServiceRouter", options.body, function(err, res2) {
 			if (err) { return console.error(err); }
 			else {
 				res.send(200);
@@ -42,13 +42,13 @@ exports.handle = (req, res) => {
 						text: "Quote is " + status + "!"
 					},
 					json: true
-				}, function (err, res, body) {
+				}, function (err, res2, body) {
 					//handle callback  
 					if (err) {
 						console.error(err)
 						return
 					  }
-					  console.log(`statusCode: ${res.statusCode}`)
+					  console.log(`statusCode: ${res2.statusCode}`)
 					  console.log(body)          
 				});
 			}
