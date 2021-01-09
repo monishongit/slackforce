@@ -25,7 +25,9 @@ exports.handle = (req, res) => {
 			}
 		}
 		console.log('options: ', options);
-		let conn = new jsforce.Connection();
+		let conn = new jsforce.Connection({
+			loginUrl: 'https://test.salesforce.com'
+		});
 		conn.login('test-kdqmffi3ivs8@example.com', 'test1234', function(err, res) {
 		if (err) { return console.error(err); }
 			// body payload structure is depending to the Apex REST method interface.
