@@ -41,12 +41,15 @@ exports.handle = (req, res) => {
 		// 		model : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
 		// 		saver : "SBAA.ApprovalRestApiProvider.Approve"
 		// 	};
+		let status = '';
 		let modelValue = payload.actions[0].value;
 		let saverValue = '';
 		if (payload.actions[0].text.text == 'Approve') {
 			saverValue = 'SBAA.ApprovalRestApiProvider.Approve'
+			status = 'approved'
 		} else {
 			saverValue = 'SBAA.ApprovalRestApiProvider.Reject'
+			status = 'rejected'
 		}
 		let options = {
 			"model" : "{\\\"approvalId\\\":\\\"a061h000002pIlTAAU\\\"}",
@@ -56,9 +59,16 @@ exports.handle = (req, res) => {
 		force.apexrest(oauthObj, '/sbaa/ServiceRouter', options).then(data => {
 			console.log('apexrest result: ', data);
 			res.send(data);
-			let result = JSON.stringify(data);
+			let result = '';
+			let replace = true;
+			if (JSON.stringify(data).contains('errorCode')) {
+				result = JSON.stringify(data)
+				replace = false
+			} else {
+				result = "Quote <Q-00000> is " + status;
+			}
 			let resBody = {
-				replace_original: false,
+				replace_original: replace,
 				text: result
 			}
 			console.log('uri', payload.response_url);
