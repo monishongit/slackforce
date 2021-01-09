@@ -39,7 +39,7 @@ exports.handle = (req, res) => {
 					uri: payload.response_url,
 					body: {
 						replace_original: false,
-						text: "Quote is approved!"
+						text: "Quote is " + status + "!"
 					},
 					json: true
 				}, function (err, res, body) {
