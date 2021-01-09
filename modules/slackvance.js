@@ -29,8 +29,8 @@ exports.handle = (req, res) => {
 			saverValue = 'SBAA.ApprovalRestApiProvider.Reject'
 		}
 		let options = {
-			model : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
-			saver : saverValue
+			"model" : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
+			"saver" : saverValue
 		}
 		console.log('options: ', options);
 		force.apexrest(oauthObj, '/sbaa/ServiceRouter', options).then(data => {
