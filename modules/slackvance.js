@@ -1,7 +1,8 @@
 "use strict";
 
 let auth = require("./slack-salesforce-auth"),
-    force = require("./force"),
+	force = require("./force"),
+	request = require('request'),
     CONTACT_TOKEN = process.env.SLACK_CONTACT_TOKEN;
 
 exports.handle = (req, res) => {
@@ -9,8 +10,22 @@ exports.handle = (req, res) => {
 		let payload = JSON.parse(req.body.payload);
 	
 		if (payload.token != CONTACT_TOKEN) {
-			console.log("invalid token..")
-			res.send("Invalid token");
+			console.log("invalid token..");//response_url
+			res.send(400);
+			request.post(
+				payload.response_url,
+				{
+				  text: "Invalid token"
+				},
+				(error, res, body) => {
+				  if (error) {
+					console.error(error)
+					return
+				  }
+				  console.log(`statusCode: ${res.statusCode}`)
+				  console.log(body)
+				}
+			)
 			return;
 		}
 
@@ -36,6 +51,21 @@ exports.handle = (req, res) => {
 		force.apexrest(oauthObj, '/sbaa/ServiceRouter', options).then(data => {
 			console.log('apexrest result: ', data);
 			res.send(data);
+			let result = JSON.stringify(data);
+			request.post(
+				payload.response_url,
+				{
+				  text: result
+				},
+				(error, res, body) => {
+				  if (error) {
+					console.error(error)
+					return
+				  }
+				  console.log(`statusCode: ${res.statusCode}`)
+				  console.log(body)
+				}
+			)
 		}).catch(error => {
 			console.log('apexrest error: ', error);
 			if (error.code == 401) {
