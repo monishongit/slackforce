@@ -30,8 +30,7 @@ let sfrequest = (oauth, path, options) => new Promise((resolve, reject) => {
 
     options.headers["Accept"]= "application/json";
     options.headers["Authorization"] = "Bearer " + oauth.access_token;
-// request.post()
-    request(options, function (error, response, body) {
+	request.post({url: path, formData: options}, function (error, response, body) {
         if (error) {
             console.log(error);
             if (response.statusCode === 401) {
