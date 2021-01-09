@@ -29,7 +29,7 @@ exports.handle = (req, res) => {
 			saverValue = 'SBAA.ApprovalRestApiProvider.Reject'
 		}
 		let options = {
-			"model" : '\"{\"approvalId\":\"a061h000002pIlTAAU\"}\"',
+			"model" : "{\\\"approvalId\\\":\\\"a061h000002pIlTAAU\\\"}",
 			"saver" : saverValue
 		}
 		console.log('options: ', options);
