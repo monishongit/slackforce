@@ -31,7 +31,7 @@ exports.handle = (req, res) => {
 		conn.login('test-kdqmffi3ivs8@example.com', 'test1234q36ZhdYW2YpT9puMOKdDNwpnQ', function(err, res) {
 		if (err) { return console.error(err); }
 			// body payload structure is depending to the Apex REST method interface.
-			conn.apex.post("sbaa/ServiceRouter", options.body, function(err, res) {
+			conn.apex.post("/sbaa/ServiceRouter", options.body, function(err, res) {
 			if (err) { return console.error(err); }
 			else {
 				request.post({
