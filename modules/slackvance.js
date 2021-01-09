@@ -10,12 +10,10 @@ exports.handle = (req, res) => {
 		let payload = JSON.parse(req.body.payload);
 	
 		if (payload.token != CONTACT_TOKEN) {
-			console.log("invalid token..");//response_url
 			res.send(400);
-			let errorMsg = `Visit this URL to login to Salesforce before taking action: https://${req.hostname}/login/` + slackUserId
 			let resBody = {
 				replace_original: false,
-				text: errorMsg
+				text: "Invalid token, contact administrator."
 			}
 			console.log('uri', payload.response_url);
 			console.log('body', resBody);
@@ -81,7 +79,25 @@ exports.handle = (req, res) => {
 		}).catch(error => {
 			console.log('apexrest error: ', error);
 			if (error.code == 401) {
-				res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/` + slackUserId);
+				res.send(error.code)
+				let errorMsg = `Visit this URL to login to Salesforce: https://${req.hostname}/login/` + slackUserId;
+				let resBody = {
+					replace_original: false,
+					text: errorMsg
+				}
+				request.post({
+					uri: payload.response_url,
+					body: resBody,
+					json: true
+				}, function (err, res, body) {
+					//handle callback  
+					if (err) {
+						console.error(err)
+						return
+					  }
+					  console.log(`statusCode: ${res.statusCode}`)
+					  console.log(body)          
+				});
 			} else {
 				res.send(data);
 			}
