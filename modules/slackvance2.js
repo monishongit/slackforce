@@ -8,7 +8,7 @@ exports.handle = (req, res) => {
 		let payload = JSON.parse(req.body.payload);
 		
 		let status = '';
-		let modelValue = {approvalId: payload.actions[0].value};
+		let modelValue = "{\"approvalId\": \"" + payload.actions[0].value + "\"}";
 		let saverValue = '';
 		if (payload.actions[0].text.text == 'Approve') {
 			saverValue = 'SBAA.ApprovalRestApiProvider.Approve'
