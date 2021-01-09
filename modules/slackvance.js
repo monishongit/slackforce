@@ -91,9 +91,10 @@ exports.handle = (req, res) => {
 			});
 		}).catch(error => {
 			console.log('apexrest error: ', error);
+			let errorMsg = '';
 			if (error.code == 401) {
 				res.send(error.code)
-				let errorMsg = `Visit this URL to login to Salesforce: https://${req.hostname}/login/` + slackUserId;
+				errorMsg = `Visit this URL to login to Salesforce: https://${req.hostname}/login/` + slackUserId;
 				let resBody = {
 					replace_original: false,
 					text: errorMsg
@@ -112,7 +113,25 @@ exports.handle = (req, res) => {
 					  console.log(body)          
 				});
 			} else {
-				res.send(data);
+				res.send(error.code);
+				errorMsg = JSON.stringify(error);
+				let resBody = {
+					replace_original: false,
+					text: errorMsg
+				}
+				request.post({
+					uri: payload.response_url,
+					body: resBody,
+					json: true
+				}, function (err, res, body) {
+					//handle callback  
+					if (err) {
+						console.error(err)
+						return
+					  }
+					  console.log(`statusCode: ${res.statusCode}`)
+					  console.log(body)          
+				});
 			}
 		});
 	} catch {
