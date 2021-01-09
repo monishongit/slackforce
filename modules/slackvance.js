@@ -34,8 +34,10 @@ exports.handle = (req, res) => {
 		}
 		console.log('options: ', options);
 		force.apexrest(oauthObj, '/sbaa/ServiceRouter', options).then(data => {
+			console.log('apexrest result: ', data);
 			res.send(data);
 		}).catch(error => {
+			console.log('apexrest error: ', error);
 			if (error.code == 401) {
 				res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/` + slackUserId);
 			} else {
