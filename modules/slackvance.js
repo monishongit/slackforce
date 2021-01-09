@@ -61,7 +61,7 @@ exports.handle = (req, res) => {
 			res.send(data);
 			let result = '';
 			let replace = true;
-			if (JSON.stringify(data).contains('errorCode')) {
+			if (JSON.stringify(data).includes('errorCode')) {
 				result = JSON.stringify(data)
 				replace = false
 			} else {
