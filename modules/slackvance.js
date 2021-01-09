@@ -12,25 +12,32 @@ exports.handle = (req, res) => {
 		if (payload.token != CONTACT_TOKEN) {
 			console.log("invalid token..");//response_url
 			res.send(400);
-			request.post(
-				payload.response_url,
-				{
-				  text: "Invalid token"
-				},
-				(error, res, body) => {
-				  if (error) {
-					console.error(error)
+			let errorMsg = `Visit this URL to login to Salesforce before taking action: https://${req.hostname}/login/` + slackUserId
+			let resBody = {
+				replace_original: false,
+				text: errorMsg
+			}
+			console.log('uri', payload.response_url);
+			console.log('body', resBody);
+			request.post({
+				uri: payload.response_url,
+				body: resBody,
+				json: true
+			}, function (err, res, body) {
+				//handle callback  
+				if (err) {
+					console.error(err)
 					return
 				  }
 				  console.log(`statusCode: ${res.statusCode}`)
-				  console.log(body)
-				}
-			)
+				  console.log(body)          
+			});
 			return;
 		}
 
     	let slackUserId = payload.user.id,
         	oauthObj = auth.getOAuthObject(slackUserId);
+		// Sample AA message format:
 		// let optionsTmp = {
 		// 		method: 'POST',
 		// 		model : "{\"approvalId\":\"a061h000002pIlTAAU\"}",
