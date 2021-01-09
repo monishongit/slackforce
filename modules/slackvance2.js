@@ -34,11 +34,12 @@ exports.handle = (req, res) => {
 			conn.apex.post("/sbaa/ServiceRouter", options.body, function(err, res) {
 			if (err) { return console.error(err); }
 			else {
+				res.send(200);
 				request.post({
 					uri: payload.response_url,
 					body: {
 						replace_original: false,
-						text: "OK!"
+						text: "Quote is approved!"
 					},
 					json: true
 				}, function (err, res, body) {
