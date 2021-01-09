@@ -53,9 +53,10 @@ exports.handle = (req, res) => {
 		}
 		let options = {
 			"method" : "POST",
-		
+			"body" : {
 				"model" : modelValue,
 				"saver" : saverValue
+			}
 		}
 		console.log('options: ', options);
 		force.apexrest(oauthObj, '/sbaa/ServiceRouter', options).then(data => {
