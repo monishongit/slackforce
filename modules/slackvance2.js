@@ -28,7 +28,7 @@ exports.handle = (req, res) => {
 		let conn = new jsforce.Connection({
 			loginUrl: 'https://test.salesforce.com'
 		});
-		conn.login('test-kdqmffi3ivs8@example.com', '', function(err, loginRes) {
+		conn.login('test-jiikdfgffm9m@example.com', 'test1234l600HAg3J5yMXk8qtZ9ECpGkN', function(err, loginRes) {
 		if (err) { return console.error(err); }
 			// body payload structure is depending to the Apex REST method interface.
 			conn.apex.post("/sbaa/ServiceRouter", options.body, function(err, res2) {
